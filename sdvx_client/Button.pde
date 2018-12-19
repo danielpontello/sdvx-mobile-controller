@@ -9,6 +9,12 @@ class Button
   color currentColor;
   String desc;
   
+  boolean justPressed;
+  boolean justReleased;
+  
+  boolean lastPressed;
+  boolean currPressed;
+  
   public Button(int x, int y, int w, int h, color mainColor, String desc)
   {
     this.x = x;
@@ -18,6 +24,11 @@ class Button
     this.mainColor = mainColor;
     this.currentColor = mainColor;
     this.desc = desc;
+    
+    justPressed = false;
+    justReleased = false;
+    lastPressed = false;
+    currPressed = false;
   }
   
   public boolean isInside(int x, int y)
@@ -30,23 +41,45 @@ class Button
   }
   
   public void update()
-  {
+  {    
+    lastPressed = currPressed;
+    currPressed = false;
+    
+    justPressed = false;
+    justReleased = false;
+    
     currentColor = mainColor;
     textColor = color(255);
+    
     for (int i = 0; i < touches.length; i++) {
       if(isInside((int)touches[i].x, (int)touches[i].y))
       {
+        currPressed = true;
         currentColor = color(255, 255, 255);
         textColor = color(0);
         break;
       }
     }
+    
+    if(lastPressed && !currPressed)
+      justReleased = true;
+      
+    if(!lastPressed && currPressed)
+      justPressed = true;
+  }
+  
+  public boolean justPressed()
+  {
+    return justPressed;
+  }
+  
+  public boolean justReleased()
+  {
+    return justReleased;
   }
   
   public void draw()
-  {
-    update();
-    
+  {    
     fill(currentColor);
     rect(x, y, w, h);
     
