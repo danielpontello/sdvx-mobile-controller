@@ -24,8 +24,9 @@ PFont mainFont;
 void setup()
 {
   // oscP5 setup  
+  // Change the IP address below to the IP of your computer
   oscP5 = new OscP5(this, 12000);
-  serverAddress = new NetAddress("192.168.15.10",32000);
+  serverAddress = new NetAddress("192.168.15.10", 32000);
   
   // Screen setup
   fullScreen();
@@ -62,19 +63,24 @@ void draw()
   background(0);  
   textFont(mainFont);
   
+  // Update button states
+  // Main buttons
   btn_a.update();    
   btn_b.update();
   btn_c.update();
   btn_d.update();
   
+  // FX Buttons
   fx_l.update();
   fx_r.update();
   
+  // Volume Buttons
   vol_l.update();
   vol_r.update();
   
   start.update();
   
+  // Send OSC messages
   sendOscMessages();
   
   // Main buttons
@@ -87,14 +93,17 @@ void draw()
   fx_l.draw();
   fx_r.draw();  
   
+  // Volume Buttons
   vol_l.draw();
   vol_r.draw();
   
+  // Draw everything
   start.draw();
 }
 
 void sendOscMessages()
 {
+  // Dispatch OSC messages for each of the buttons pressed.
   if(btn_a.justPressed())
   {
     OscMessage msg = new OscMessage("/btn-a");
@@ -192,7 +201,9 @@ void sendOscMessages()
     msg.add("R");
     oscP5.send(msg, serverAddress);
   }
-  
+
+
+  // In sliders, we send the current slider position as a float
   if(vol_l.getValue() != 0)
   {
     OscMessage msg = new OscMessage("/vol-l");

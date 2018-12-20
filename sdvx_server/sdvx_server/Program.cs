@@ -138,7 +138,7 @@ namespace sdvx_server
                         lastL = currL;
                         currL = float.Parse(content);
                         float deltaL = lastL - currL;
-                        L += deltaL;
+                        L -= deltaL;
                         
                         joystick.SetAxis((int)L*500, id, HID_USAGES.HID_USAGE_SL0);
                         break;
@@ -147,7 +147,7 @@ namespace sdvx_server
                         lastR = currR;
                         currR = float.Parse(content);
                         float deltaR = lastR - currR;
-                        R += deltaR;
+                        R -= deltaR;
                         joystick.SetAxis((int)R * 500, id, HID_USAGES.HID_USAGE_SL1);
                         break;
                 }
