@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdvx_server", "sdvx_server\sdvx_server.csproj", "{D8778918-C143-4282-94A7-864C8FF4B283}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Debug|x64.ActiveCfg = Debug|x64
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Debug|x64.Build.0 = Debug|x64
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Release|x64.ActiveCfg = Release|x64
+		{D8778918-C143-4282-94A7-864C8FF4B283}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F8D0597-8FE3-4BEB-A50D-916E8C695F35}
+	EndGlobalSection
+EndGlobal

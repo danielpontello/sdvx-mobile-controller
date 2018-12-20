@@ -10,9 +10,13 @@ Button btn_a, btn_b, btn_c, btn_d;
 Button fx_l, fx_r;
 Button start;
 
+Slider vol_l, vol_r;
+
 // Button colors
 color mainBtnColor = color(42, 154, 108);
 color fxBtnColor = color(201, 20, 51);
+color volLColor = color(107, 241, 253);
+color volRColor = color(255, 118, 255);
 
 // Application fonts
 PFont mainFont;
@@ -46,7 +50,11 @@ void setup()
   fx_r = new Button(mainBtnSize*2, margins + mainBtnSize, mainBtnSize*2, margins, fxBtnColor, "FX-R");
   
   // Start button
-  start = new Button(0, 0, margins, margins, color(0, 0, 255), "START");
+  start = new Button((width/2)-(margins/4), 0, margins/2, margins, color(0, 0, 255), "STRT");
+  
+  // Sliders
+  vol_l = new Slider(0, 0, (mainBtnSize*2)-(margins/4), margins, volLColor, "VOL-L");
+  vol_r = new Slider((width/2)+(margins/4), 0, mainBtnSize*2-(margins/4), margins, volRColor, "VOL-R");
 }
 
 void draw()
@@ -62,6 +70,9 @@ void draw()
   fx_l.update();
   fx_r.update();
   
+  vol_l.update();
+  vol_r.update();
+  
   start.update();
   
   sendOscMessages();
@@ -75,6 +86,9 @@ void draw()
   // FX Buttons
   fx_l.draw();
   fx_r.draw();  
+  
+  vol_l.draw();
+  vol_r.draw();
   
   start.draw();
 }
@@ -176,6 +190,20 @@ void sendOscMessages()
   {
     OscMessage msg = new OscMessage("/start");
     msg.add("R");
+    oscP5.send(msg, serverAddress);
+  }
+  
+  if(vol_l.getValue() != 0)
+  {
+    OscMessage msg = new OscMessage("/vol-l");
+    msg.add(vol_l.getValue());
+    oscP5.send(msg, serverAddress);
+  }
+  
+  if(vol_r.getValue() != 0)
+  {
+    OscMessage msg = new OscMessage("/vol-r");
+    msg.add(vol_r.getValue());
     oscP5.send(msg, serverAddress);
   }
 }
