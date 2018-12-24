@@ -15,6 +15,8 @@ class Button
   boolean lastPressed;
   boolean currPressed;
   
+  int padding = 20;
+  
   public Button(int x, int y, int w, int h, color mainColor, String desc)
   {
     this.x = x;
@@ -80,10 +82,12 @@ class Button
   
   public void draw()
   {    
+    noStroke();
     fill(currentColor);
-    rect(x, y, w, h);
+    rect(x + padding, y + padding, w-(padding*2), h-(padding*2), 10);
     
+    textAlign(CENTER, CENTER);
     fill(textColor);
-    text(desc, x+20, y+50);
+    text(desc, (x+w)/2, (y+h)/2);
   }
 }

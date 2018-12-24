@@ -13,13 +13,19 @@ Button start;
 Slider vol_l, vol_r;
 
 // Button colors
-color mainBtnColor = color(42, 154, 108);
+color mainBtnColor = color(45, 219, 184);
 color fxBtnColor = color(201, 20, 51);
 color volLColor = color(107, 241, 253);
 color volRColor = color(255, 118, 255);
 
 // Application fonts
 PFont mainFont;
+
+float lastRPos;
+float currRPos;
+
+float lastLPos;
+float currLPos;
 
 void setup()
 {
@@ -31,6 +37,7 @@ void setup()
   // Screen setup
   fullScreen();
   orientation(LANDSCAPE);
+  smooth(2); 
   
   
   // Layout sizes
@@ -38,29 +45,35 @@ void setup()
   int margins = (height - mainBtnSize)/2;
   
   // Font
-  mainFont = createFont("Teko-SemiBold.ttf", 36, true);
+  mainFont = createFont("Teko-SemiBold.ttf", 24, true);
   
   // Main buttons
-  btn_a = new Button(0, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-A");
-  btn_b = new Button(mainBtnSize*1, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-B");
-  btn_c = new Button(mainBtnSize*2, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-C");
-  btn_d = new Button(mainBtnSize*3, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-D");
+  btn_a = new Button(0, margins, mainBtnSize, mainBtnSize, mainBtnColor, "A");
+  btn_b = new Button(mainBtnSize*1, margins, mainBtnSize, mainBtnSize, mainBtnColor, "B");
+  btn_c = new Button(mainBtnSize*2, margins, mainBtnSize, mainBtnSize, mainBtnColor, "C");
+  btn_d = new Button(mainBtnSize*3, margins, mainBtnSize, mainBtnSize, mainBtnColor, "D");
   
   // FX buttons
   fx_l = new Button(0, margins + mainBtnSize, mainBtnSize*2, margins, fxBtnColor, "FX-L");
   fx_r = new Button(mainBtnSize*2, margins + mainBtnSize, mainBtnSize*2, margins, fxBtnColor, "FX-R");
   
   // Start button
-  start = new Button((width/2)-(margins/4), 0, margins/2, margins, color(0, 0, 255), "STRT");
+  start = new Button((width/2)-(margins/4), 0, margins/2, margins, color(0, 0, 255), "S");
   
   // Sliders
   vol_l = new Slider(0, 0, (mainBtnSize*2)-(margins/4), margins, volLColor, "VOL-L");
   vol_r = new Slider((width/2)+(margins/4), 0, mainBtnSize*2-(margins/4), margins, volRColor, "VOL-R");
+  
+  lastRPos = 0;
+  currRPos = 0;
+  
+  lastLPos = 0;
+  currLPos = 0;
 }
 
 void draw()
 {
-  background(0);  
+  background(15, 28, 36);  
   textFont(mainFont);
   
   // Update button states
@@ -206,15 +219,33 @@ void sendOscMessages()
   // In sliders, we send the current slider position as a float
   if(vol_l.getValue() != 0)
   {
-    OscMessage msg = new OscMessage("/vol-l");
-    msg.add(vol_l.getValue());
-    oscP5.send(msg, serverAddress);
+    lastLPos = currLPos;
+    currLPos = vol_l.getValue();
+    
+    if(currLPos != lastLPos)
+    {
+      OscMessage msg = new OscMessage("/vol-l");
+      msg.add(currLPos);
+      oscP5.send(msg, serverAddress);
+    }
+  } else {
+    lastLPos = 0;
+    currLPos = 0;
   }
   
   if(vol_r.getValue() != 0)
   {
-    OscMessage msg = new OscMessage("/vol-r");
-    msg.add(vol_r.getValue());
-    oscP5.send(msg, serverAddress);
+    lastRPos = currRPos;
+    currRPos = vol_r.getValue();
+    
+    if(currRPos != lastRPos)
+    {
+      OscMessage msg = new OscMessage("/vol-r");
+      msg.add(currRPos);
+      oscP5.send(msg, serverAddress);
+    }
+  } else {
+    lastRPos = 0;
+    currRPos = 0;
   }
 }

@@ -25,6 +25,8 @@ class Slider
   
   int pressIndex;
   
+  int padding = 20;
+  
   public Slider(int x, int y, int w, int h, color mainColor, String desc)
   {
     this.x = x;
@@ -114,7 +116,7 @@ class Slider
   
   public float getValue()
   {
-    return currValue *100;
+    return currValue *200;
   }
   
   public boolean justPressed()
@@ -135,15 +137,16 @@ class Slider
   public void draw()
   {    
     fill(currentColor);
-    rect(x, y, w, h);
+    rect(x + padding, y + padding, w-(padding*2), h-(padding*2), 10);
     
+    textAlign(CENTER, CENTER);
     fill(textColor);
-    text(desc, x+20, y+50);
+    text(desc, (x+w)/2, (y+h)/2);
     
     if(isPressed)
     {
-      fill(255);
-      rect(currPressedPos-5, y, 10, h);
+      fill(127);
+      rect(currPressedPos-5, y+padding, 10, h-(padding*2));
     }
     fill(0);
   }
