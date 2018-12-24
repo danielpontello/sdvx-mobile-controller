@@ -135,20 +135,25 @@ namespace sdvx_server
                         break;
 
                     case "/vol-l":
-                        lastL = currL;
-                        currL = float.Parse(content);
-                        float deltaL = lastL - currL;
-                        L -= deltaL;
+                        //lastL = currL;
+                        //currL = float.Parse(content);
+                        //float deltaL = lastL - currL;
+                        //L -= deltaL;
+
+                        float lPos = float.Parse(content);
                         
-                        joystick.SetAxis((int)L*500, id, HID_USAGES.HID_USAGE_SL0);
+                        joystick.SetAxis((int)lPos*400, id, HID_USAGES.HID_USAGE_SL0);
                         break;
 
                     case "/vol-r":
-                        lastR = currR;
-                        currR = float.Parse(content);
-                        float deltaR = lastR - currR;
-                        R -= deltaR;
-                        joystick.SetAxis((int)R * 500, id, HID_USAGES.HID_USAGE_SL1);
+                        // lastR = currR;
+                        // currR = float.Parse(content);
+                        // float deltaR = lastR - currR;
+                        // R -= deltaR;
+
+                        float rPos = float.Parse(content);
+
+                        joystick.SetAxis((int)rPos * 400, id, HID_USAGES.HID_USAGE_SL1);
                         break;
                 }
                 Console.WriteLine("[OSC] Message Received: Address:" + messageReceived.Address + ", args: " + messageReceived.Arguments[0]);
