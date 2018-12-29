@@ -140,9 +140,9 @@ namespace sdvx_server
                         //float deltaL = lastL - currL;
                         //L -= deltaL;
 
-                        float lPos = float.Parse(content);
+                        int lPos = int.Parse(content);
                         
-                        joystick.SetAxis((int)lPos*400, id, HID_USAGES.HID_USAGE_SL0);
+                        joystick.SetAxis(lPos*400, id, HID_USAGES.HID_USAGE_SL0);
                         break;
 
                     case "/vol-r":
@@ -151,12 +151,12 @@ namespace sdvx_server
                         // float deltaR = lastR - currR;
                         // R -= deltaR;
 
-                        float rPos = float.Parse(content);
+                        int rPos = int.Parse(content);
 
-                        joystick.SetAxis((int)rPos * 400, id, HID_USAGES.HID_USAGE_SL1);
+                        joystick.SetAxis(rPos * 400, id, HID_USAGES.HID_USAGE_SL1);
                         break;
                 }
-                Console.WriteLine("[OSC] Message Received: Address:" + messageReceived.Address + ", args: " + messageReceived.Arguments[0]);
+                // Console.WriteLine("[OSC] Message Received: Address:" + messageReceived.Address + ", args: " + messageReceived.Arguments[0]);
             };
 
             var listener = new UDPListener(32000, callback);

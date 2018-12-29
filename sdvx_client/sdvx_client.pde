@@ -37,7 +37,6 @@ void setup()
   // Screen setup
   fullScreen();
   orientation(LANDSCAPE);
-  smooth(2); 
   
   
   // Layout sizes
@@ -45,20 +44,20 @@ void setup()
   int margins = (height - mainBtnSize)/2;
   
   // Font
-  mainFont = createFont("Teko-SemiBold.ttf", 24, true);
+  mainFont = createFont("Teko-SemiBold.ttf", 36, true);
   
   // Main buttons
-  btn_a = new Button(0, margins, mainBtnSize, mainBtnSize, mainBtnColor, "A");
-  btn_b = new Button(mainBtnSize*1, margins, mainBtnSize, mainBtnSize, mainBtnColor, "B");
-  btn_c = new Button(mainBtnSize*2, margins, mainBtnSize, mainBtnSize, mainBtnColor, "C");
-  btn_d = new Button(mainBtnSize*3, margins, mainBtnSize, mainBtnSize, mainBtnColor, "D");
+  btn_a = new Button(0, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-A");
+  btn_b = new Button(mainBtnSize*1, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-B");
+  btn_c = new Button(mainBtnSize*2, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-C");
+  btn_d = new Button(mainBtnSize*3, margins, mainBtnSize, mainBtnSize, mainBtnColor, "BTN-D");
   
   // FX buttons
   fx_l = new Button(0, margins + mainBtnSize, mainBtnSize*2, margins, fxBtnColor, "FX-L");
   fx_r = new Button(mainBtnSize*2, margins + mainBtnSize, mainBtnSize*2, margins, fxBtnColor, "FX-R");
   
   // Start button
-  start = new Button((width/2)-(margins/4), 0, margins/2, margins, color(0, 0, 255), "S");
+  start = new Button((width/2)-(margins/4), 0, margins/2, margins, color(0, 0, 255), "ST");
   
   // Sliders
   vol_l = new Slider(0, 0, (mainBtnSize*2)-(margins/4), margins, volLColor, "VOL-L");
@@ -225,7 +224,7 @@ void sendOscMessages()
     if(currLPos != lastLPos)
     {
       OscMessage msg = new OscMessage("/vol-l");
-      msg.add(currLPos);
+      msg.add((int)currLPos);
       oscP5.send(msg, serverAddress);
     }
   } else {
@@ -241,7 +240,7 @@ void sendOscMessages()
     if(currRPos != lastRPos)
     {
       OscMessage msg = new OscMessage("/vol-r");
-      msg.add(currRPos);
+      msg.add((int)currRPos);
       oscP5.send(msg, serverAddress);
     }
   } else {

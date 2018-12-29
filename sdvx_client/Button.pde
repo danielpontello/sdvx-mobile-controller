@@ -86,8 +86,7 @@ class Button
     fill(currentColor);
     rect(x + padding, y + padding, w-(padding*2), h-(padding*2), 10);
     
-    textAlign(CENTER, CENTER);
     fill(textColor);
-    text(desc, (x+w)/2, (y+h)/2);
+    text(desc, (x+padding+40), (y+padding+60));
   }
 }
